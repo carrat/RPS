@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock!Paper!Scissors!FIGHT!</title>
+    
+    <link href="assets/css/rps_style.css" rel="stylesheet" type="text/css"><!-- Add unique stylesheet -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Oxygen:300,400,700|Raleway:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet"><!-- Add Google Web Font -->
+    <script
+    src="https://code.jquery.com/jquery-3.1.0.js"   
+    integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   
+    crossorigin="anonymous">   // Add jQuery
+    </script>
+</head>
+
+<body>
+
+<div id="header">
+    <div id="header-inner">
+        <div id="logo"><img src="assets/images/rps-logo.png" width="300"></div>
+    </div>
+</div>
+
+<div id="container">
+
+    <div id="main-content">
+        <div id="main-content-inner">   
+
+            
+
+            <div id="gameSpace">
+
+                <div id="playerOneBox" class="playerBox">
+                    <div class="avatar">
+                        <img src="assets/images/avatars/avatar1.png" class="avatarImg">
+                        <h3>Won: <span class="playerOneWins blue wins">4</span>  Lost: <span class="playerOneLosses orange wins">3</span></h3>
+                    </div>
+                    <div class="stats playerOneStats"></div>
+
+
+                </div>
+
+                <div id="center-column">
+                    <div id="gameUpdates"><h1>Player One Wins!</h1></div>
+                    <div id="gameBoard">
+                        <div id="playerOneButtons" class="playerButtons">
+                            <div class="playerLabel"><h4 class="player-name-label">PLAYER</h4><h1 class="playerOne">1</h1></div>
+                            <div class="icon rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
+                            <div class="icon paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
+                            <div class="icon scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
+                        </div>
+                        <div id="playerTwoButtons" class="playerButtons">
+                            <div class="playerLabel"><h4 class="player-name-label">PLAYER</h4><h1 class="playerTwo">2</h1></div>
+                            <div class="icon rock"><img src="assets/images/rock-gray.png" class="icon-img" data-icon="2a1" data-over="2a2"></div>
+                            <div class="icon paper"><img src="assets/images/paper-gray.png" class="icon-img" data-icon="2b1" data-over="2b2"></div>
+                            <div class="icon scissors"><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="2c1" data-over="2c2"></div>
+                        </div>
+                    </div>
+                 </div>
+                    <div id="playerTwoBox" class="playerBox">
+                        <div class="avatar">
+                            <img src="assets/images/avatars/avatar2.png" class="avatarImg">
+                            <h3>Won: <span class="playerTwoWins orange wins">4</span>  Lost: <span class="playerTwoLosses blue wins">3</span></h3>
+                        </div>
+                        <div class="stats playerTwoStats"></div>
+                    </div>
+               
+
+            </div>
+
+        </div>        
+    </div>
+</div>
+
+<div id="footer">
+
+        <div id="footer-inner">
+        <p> NEVER run with scissors...or rocks...or paper.</p>
+        <p>&copy; 2016  <strong><a href="https://www.linkedin.com/in/ideabrothers">Andrew Carr</a></strong> | 
+        Demo project for <a href="https://www.codingbootcamputaustin.com/">The Coding Boot Camp</a>  at UT Austin Center for Professional Education
+        </p>
+        </div>
+ 
+</div>
+
+<script>
+// If page is ready
+$(document).ready(function(){
+
+
+    var currentTurn = 1; // keeps track of whose turn it is
+
+    var playerOne = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+        gamesPlayed: 0,
+        rock: 0,
+        paper: 0,
+        scissors: 0,
+        rockWins: 0,
+        paperWins: 0,
+        scissorsWins: 0,
+        rockLosses: 0,
+        paperLosses: 0,
+        scissorsLosses: 0,
+        rockTies: 0,
+        paperTies: 0,
+        scissorsTies: 0
+    }
+
+    var playerTwo = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+        gamesPlayed: 0,
+        rock: 0,
+        paper: 0,
+        scissors: 0,
+        rockWins: 0,
+        paperWins: 0,
+        scissorsWins: 0,
+        rockLosses: 0,
+        paperLosses: 0,
+        scissorsLosses: 0,
+        rockTies: 0,
+        paperTies: 0,
+        scissorsTies: 0
+    }
+
+
+// Rollovers for RPS buttons
+    $('.icon-img').mouseenter(function() {
+    $(this).attr('src', 'assets/images/' + $(this).attr('data-over') +'.png')
+    });
+
+    $('.icon-img').mouseleave(function() {
+     $(this).attr('src', 'assets/images/' + $(this).attr('data-icon') +'.png')
+    });
+
+   
+
+
+});
+</script>
+</body>
+</html>
+
+
+
+

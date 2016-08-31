@@ -34,12 +34,13 @@ a:hover {
 	max-width: 980px;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-top: 20px;
+	padding-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
 	background: rgba(0,0,0,.8);
 	clear: both;
 	margin-bottom: 0px;
+	margin-top: 10px;
 	text-align: center;
 }
 
@@ -53,30 +54,47 @@ a:hover {
 	margin-right: auto;
 	clear: both;
 	border: 1px solid #ff8e09;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
 	text-align: center;
 }
 
+#gameSpace {
+	display: table;
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+	margin: 0px;
+}
 #gameUpdates {
 	width: 100%;
-	padding: 5px;
-	height: 80px;
-	border: 1px solid #ff8e09;
+	padding: 15px;
+	text-align: center;
+}
+
+#gameUpdates h1 {
+	font-family: 'Bangers', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 36px;
+	margin: 0px;
+	padding: 0px;
+	letter-spacing: .05em;
+
 }
 
 .playerBox {
-	width: 30%;
 	padding: 10px;
-	border: 1px solid #ff8e09;
-	display: inline-block;
-	height: 400px;
+	display: table-cell;
+	vertical-align: top;
 }
 
 .playerButtons {
-	width: 33%;
 	padding: 10px;
-	border: 1px solid #ff8e09;
 	display: inline-block;
 	height: 100%;
+	width: 45%;
 
 }
 
@@ -89,16 +107,79 @@ a:hover {
 
 }
 
+.playerLabel h4 {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 16px;
+	margin: 0px;
+	padding: 0px;
+	letter-spacing: .1em;
+
+}
+
+.playerLabel h1 {
+	font-family: 'Oxygen', Arial, sans-serif;
+	font-size: 60px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 40px;
+	padding: 0px;
+	line-height: 60px;
+
+}
+
+.playerLabel h1.playerOne {
+	color: #0095b0;
+}
+
+.playerLabel h1.playerTwo {
+	color: #ff6c00;
+}
+
 #gameBoard {
 	width: 39%;
 	padding: 0px;
-	display: inline-block;
-	height: 400px;
+	display: table-cell;
+	text-align: center;
+}
+
+.avatar h3 {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 22px;
+
+
+}
+
+.avatarImg {
+	height: 250px;
 }
 
 #logo {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.icon-img {
+	height: 70px;
+	width: 70px;
+	margin-bottom: 10px;
+}
+
+.rock {
+	
+}
+
+.paper {
+	
+}
+
+.scissors {
+	
+}
+
+.avatar {
+	text-align: center;
 }
 
 #container {
@@ -108,10 +189,10 @@ a:hover {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
-	margin-bottom: 50px;
+	margin-bottom: 5px;
 	clear: both;
 	padding-bottom: 20px;
-	padding-top: 20px;
+	padding-top: 0px;
 	background: rgba(0,0,0,.8);
 }
 
@@ -132,7 +213,8 @@ a:hover {
 	height: 100%;
 	padding-left: 0px;
 	padding-right: 0px;
-	padding-top: 0px;
+	padding-top: 20px;
+	vertical-align: top;
 }
 
 #footer {
@@ -141,16 +223,16 @@ a:hover {
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 0px;
-	position: fixed;
+	/*position: fixed;
 	bottom: 0;
-	left: 0;
+	left: 0;*/
 }
 #footer-inner {
 	max-width: 980px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	padding-top: 20px;
+	padding-top: 0px;
 	padding-bottom: 0px;
 	padding-right: 20px;
 	padding-left: 20px;
@@ -182,6 +264,66 @@ a:hover {
 
 .emphasis {
 	color: #20a28e;
+	margin-right: 10px;
+	font-size: 22px;
+}
+
+.orange {
+	color: #ff6c00;
+}
+
+.blue {
+	color: #0096b1;
+
+}
+
+.wins {
+	font-size:22px;
+	margin-right: 20px;
+	margin-left: 10px;
+}
+
+.stat-block {
+	margin-bottom: 10px;
+}
+
+.small-icon {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.small-icon img {
+	height: 40px;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+.stat {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 16px;
+	display: table-cell;
+	padding: 10px;
+	padding-left: 15px;
+	margin-right: 20px;
+	vertical-align: middle;
+}
+
+.stat-label {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ff8e09;
+	font-size: 16px;
+	margin-left: 10px;
+}
+
+.stat-table-label {
+	width: 100%;
+	text-align: middle;
+	margin-right: 30px;
+}
+
+.stats {
+	margin-left: 30px;
 }
 
 @media screen and (max-width: 768px) {
