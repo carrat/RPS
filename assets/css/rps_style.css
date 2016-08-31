@@ -37,11 +37,13 @@ a:hover {
 	padding-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
-	background: rgba(0,0,0,.8);
+	background: rgba(125,0,0,.8);
 	clear: both;
 	margin-bottom: 0px;
 	margin-top: 10px;
 	text-align: center;
+	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.6);
+	border-top: 5px solid #ff8e09;
 }
 
 #header-inner {
@@ -110,10 +112,11 @@ a:hover {
 .playerLabel h4 {
 	font-family: 'Oxygen', Arial, sans-serif;
 	color: #ffffff;
-	font-size: 16px;
+	font-size: 13px;
 	margin: 0px;
 	padding: 0px;
 	letter-spacing: .1em;
+	margin-top: -75px;
 
 }
 
@@ -128,6 +131,10 @@ a:hover {
 
 }
 
+.playerLabel {
+	margin-bottom: 40px;
+}
+
 .playerLabel h1.playerOne {
 	color: #0095b0;
 }
@@ -138,7 +145,7 @@ a:hover {
 
 #gameBoard {
 	width: 39%;
-	padding: 0px;
+	padding-top: 40px;
 	display: table-cell;
 	text-align: center;
 }
@@ -158,12 +165,14 @@ a:hover {
 #logo {
 	padding-top: 15px;
 	padding-bottom: 15px;
+
 }
 
 .icon-img {
 	height: 70px;
 	width: 70px;
 	margin-bottom: 10px;
+
 }
 
 .rock {
@@ -194,6 +203,8 @@ a:hover {
 	padding-bottom: 20px;
 	padding-top: 0px;
 	background: rgba(0,0,0,.8);
+	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.6);
+
 }
 
 #main-content {
@@ -204,6 +215,7 @@ a:hover {
 	margin-bottom: 0px;
 	margin-top: 0px;
 	border: 1px solid #ff8e09;
+	border-top: none;
 	height: 600px;
 
 }
@@ -215,6 +227,8 @@ a:hover {
 	padding-right: 0px;
 	padding-top: 20px;
 	vertical-align: top;
+
+
 }
 
 #footer {

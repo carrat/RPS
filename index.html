@@ -60,13 +60,13 @@
                     <div id="gameUpdates"><h1>Player One Wins!</h1></div>
                     <div id="gameBoard">
                         <div id="playerOneButtons" class="playerButtons">
-                            <div class="playerLabel"><h4 class="player-name-label">PLAYER</h4><h1 class="playerOne">1</h1></div>
+                            <div class="playerLabel"><h1 class="playerOne">1</h1><h4 class="player-name-label">PLAYER</h4></div>
                             <div class="icon rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
                             <div class="icon paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
                             <div class="icon scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
                         </div>
                         <div id="playerTwoButtons" class="playerButtons">
-                            <div class="playerLabel"><h4 class="player-name-label">PLAYER</h4><h1 class="playerTwo">2</h1></div>
+                            <div class="playerLabel"><h1 class="playerTwo">2</h1><h4 class="player-name-label">PLAYER</h4></div>
                             <div class="icon rock"><img src="assets/images/rock-gray.png" class="icon-img" data-icon="2a1" data-over="2a2"></div>
                             <div class="icon paper"><img src="assets/images/paper-gray.png" class="icon-img" data-icon="2b1" data-over="2b2"></div>
                             <div class="icon scissors"><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="2c1" data-over="2c2"></div>
@@ -159,6 +159,8 @@ $(document).ready(function(){
         scissorsTies: 0
     }
 
+    var playerOneChoice;
+    var playerTwoChoice;
 
 // Write scoreboard
     $('.playerOneWins').html(playerOne.wins);
