@@ -1,0 +1,367 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+	
+	
+	/*background-color: rgba(255,255,255,.9);*/
+	/*background: #ededed;*/
+	/*background: #FFFFFF;*/
+}
+
+body {
+	margin: 0px;
+	font-family: 'Poppins', Arial, sans-serif;
+	font-size: 15px;
+	margin-bottom: 0px;
+}
+
+a {
+	color: #ffffff;
+	font-style: none;
+	font-variant: none;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #d8931c;
+	font-style: none;
+	font-variant: none;
+	text-decoration: none;
+}
+
+#header {
+	max-width: 1280px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	background: rgba(255,255,255,1.0);
+	clear: both;
+	margin-bottom: 0px;
+	margin-top: 10px;
+	text-align: center;
+	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
+	/*box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.6);*/
+	border-left: 1px solid #ededed;
+	border-top: 1px solid #ededed;
+}
+
+#header-inner {
+	width: 100%;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	clear: both;
+	border: none;
+	text-align: center;
+}
+
+#container {
+	max-width: 1280px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	clear: both;
+	padding-bottom: 20px;
+	padding-top: 0px;
+	background: rgba(255,255,255,1.0);
+	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
+	border-left: 1px solid #ededed;
+	background-image: url('..//images/rps-bg.png');
+	background-size: cover;;
+	min-height: 100%;
+}
+
+#main-content {
+	width: 100%;
+	padding: 5px;
+	text-align: left;
+	vertical-align: middle;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	/*border: 1px solid #ff8e09;*/
+	border-top: none;
+	height: 600px;
+}
+
+#main-content-inner { 
+	width: 100%;
+	height: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 20px;
+	vertical-align: top;
+}
+
+#gameSpace {
+	display: table;
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+	margin: 0px;
+}
+#gameUpdates {
+	width: 100%;
+	padding: 0px;
+	text-align: center;
+}
+
+#gameUpdates h1 {
+	font-family: 'Londrina Shadow', Arial, sans-serif;
+	color: #999999;
+	font-size: 48px;
+	margin: 0px;
+	padding: 0px;
+	letter-spacing: .05em;
+
+}
+
+.playerBox {
+	padding: 10px;
+	display: table-cell;
+	vertical-align: top;
+	text-align: center;
+	width: 33%;
+}
+
+span.wins {
+	text-align: right;
+}
+
+.playerButtons {
+	padding: 10px;
+	display: inline-block;
+	height: 100%;
+	width: 45%;
+
+}
+
+#playResults {
+	width: 31%;
+	padding: 10px;
+	border: none;
+	display: inline-block;
+	height: 100%;
+
+}
+
+.playerLabel h4 {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 13px;
+	margin: 0px;
+	padding: 0px;
+	letter-spacing: .1em;
+	margin-top: -75px;
+
+}
+
+.playerLabel h1 {
+	font-family: 'Oxygen', Arial, sans-serif;
+	font-size: 60px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 40px;
+	padding: 0px;
+	line-height: 60px;
+
+}
+
+.playerLabel {
+	margin-bottom: 40px;
+}
+
+.playerLabel h1.playerOne {
+	color: #0095b0;
+}
+
+.playerLabel h1.playerTwo {
+	color: #ff6c00;
+}
+
+#gameBoard {
+	width: 39%;
+	padding-top: 40px;
+	display: table-cell;
+	text-align: center;
+}
+
+.avatar {
+	width: 100%;
+}
+
+.avatar-right {
+}
+
+.avatar h3 {
+	font-family: 'Amatica SC', Arial, sans-serif;
+	color: #999999;
+	font-size: 30px;
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 10px;
+	line-height: 30px;
+}
+
+.avatarImg {
+	height: 250px;
+}
+
+#logo {
+	padding-top: 15px;
+	padding-bottom: 15px;
+
+}
+
+.icon-img {
+	height: 70px;
+	width: 70px;
+	margin-bottom: 10px;
+
+}
+
+.rock {
+	
+}
+
+.paper {
+	
+}
+
+.scissors {
+	
+}
+
+#center-column {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+
+#footer {
+	width: 100%;
+	margin: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	/*position: fixed;
+	bottom: 0;
+	left: 0;*/
+}
+#footer-inner {
+	max-width: 1280px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 20px;
+	padding-bottom: 0px;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #999999;
+	font-size: 12px;
+}
+
+#footer-inside {
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	/*background: linear-gradient(#000000, #363636);*/
+}
+
+#footer a {
+	color: #ff8e09;
+	font-style: none;
+	font-variant: none;
+	text-decoration: none;
+}
+
+#footer a:hover {
+	color: #d8931c;
+	font-style: none;
+	font-variant: none;
+	text-decoration: none;
+}
+
+.emphasis {
+	color: #20a28e;
+	margin-right: 10px;
+	font-size: 22px;
+}
+
+.avatar h3 span.orange {
+	color: #ff8e09;
+	font-size: 40px;
+	font-family: 'Covered By Your Grace', Arial, sans-serif;
+}
+
+.blue {
+	color: #ff8e09;
+	font-size: 36px;
+
+}
+
+
+
+.stat-block {
+	margin-bottom: 10px;
+}
+
+.small-icon {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.small-icon img {
+	height: 40px;
+	margin-right: 20px;
+	display: inline-block;
+}
+
+.stat {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ffffff;
+	font-size: 16px;
+	display: table-cell;
+	padding: 10px;
+	padding-left: 15px;
+	margin-right: 20px;
+	vertical-align: middle;
+}
+
+.stat-label {
+	font-family: 'Oxygen', Arial, sans-serif;
+	color: #ff8e09;
+	font-size: 16px;
+	margin-left: 10px;
+}
+
+.stat-table-label {
+	width: 100%;
+	text-align: middle;
+	margin-right: 30px;
+}
+
+.stats {
+	margin-left: 30px;
+}
+
+@media screen and (max-width: 768px) {
+	
+
+
+
+}
+
+
+	
