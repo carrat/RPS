@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock!Paper!Scissors!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add unique stylesheet -->
+    <link href="assets/css/rps_style_2.css" rel="stylesheet" type="text/css">
+<!-- Add Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Oxygen:300,400,700|Raleway:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Covered+By+Your+Grace|Handlee|Satisfy|Shadows+Into+Light|Shadows+Into+Light+Two|Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Londrina+Shadow|Pacifico" rel="stylesheet">
+<!-- Firebase JavaScript Link -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<!--load firebase credentials from outside root -->
+    <script src="../firebase.rps.js"></script>
+<!-- add jQuery -->
+    <script
+    src="https://code.jquery.com/jquery-3.1.0.js"   
+    integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   
+    crossorigin="anonymous">   
+    </script>
+</head>
+
+<body>
+<div id="header">
+    <div id="header-inner">
+        <div id="logo"> <img src="assets/images/RPS-logo-3.png" class="rps-logo"></div>
+    </div>
+</div>
+
+<div id="container">
+    <div id="main-content">
+        <div id="main-content-inner"> 
+            <div id="gameUpdates"></div>  
+            <div id="rps"> 
+                <div class="icon" id="rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
+                <div class="icon" id="paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
+                <div class="icon" id="scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
+            </div>
+            <div id="gameSpace">
+                <div class="login-box"></div>
+                <div id="gameboardElements">
+                    <div id="playerOneBox" class="playerBox">
+                        <div class="avatar">
+                            <div class="playerName playerOneName"></div>
+                            <h3>Won: <span class="playerOneWins orange"></span></h3>
+                            <h3>Lost: <span class="playerOneLosses orange"></span></h3>
+                        </div>
+                    </div>
+
+                    <div id="center-column">
+                        <div id="gameBoard">
+                            <div id="rps"></div>
+                        </div>
+                    </div>
+
+                    <div id="playerTwoBox" class="playerBox">
+                        <div class="avatar">
+                            <div class="playerName playerTwoName"></div>
+                            <h3>Won: <span class="playerTwoWins orange"></span></h3>
+                            <h3>Lost: <span class="playerTwoLosses orange"></span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="watchers"></div>
+        </div>  
+    </div>
+    <div id="buttons"><button class="log-out">Clear Game</button></div>
+</div>
+
+<div id="footer">
+    <div id="footer-inner">
+        <p> NEVER run with scissors...or rocks...or paper.</p>
+        <p>&copy; 2016  <strong><a href="https://www.linkedin.com/in/ideabrothers">Andrew Carr</a></strong> | 
+        Demo project for <a href="https://www.codingbootcamputaustin.com/">The Coding Boot Camp</a>  at UT Austin Center for Professional Education
+        </p>
+    </div>
+</div>
+
+<script>
+// Hide the gameboard elememts that will later reappear after login is complete
+$('#gameboardElements').hide();
+$('#rps').hide();
+
+// If page is ready
+$(document).ready(function(){
+
+// Initalize game variables
+    var playerOneChoice = null; // hold the RPS choice of player one for each match
+    var playerTwoChoice = null; // hold the RPS choice of player two for each match
+    var turn = 1; // determines whose turn it is to choose RPS
+// Game object holds all of the relevant data for active game
+    var gameWinner; // holds the game winner
+    var gameLoser; // holds the game loser
+    var game = {
+        key: '',
+        p1: null,
+        p2: null,
+        matches: 1
+    };
+// Match object holds all of the relevant data for active match
+    var match = {
+        count: 1,
+        p1: 0,
+        p2: 0
+    };
+
+console.log("First Gme: " + game.matches);
+// Update the Game feedback message and print to game board
+    function deliverGameUpdate(update) {  
+        $('#gameUpdates').html('<h1>'+ update + '</h1>');
+    }
+
+// Start match -- three matches make up one game
+    function loadMatch(match) {
+        turn = 1;
+        deliverGameUpdate('Player One: Choose!');
+        $('#rps').show();
+
+        // event Handler for click on RPS button
+        $('.icon').click(function(){
+            if (turn === 1) {
+                playerOneChoice = $(this).attr('id');
+                deliverGameUpdate('Player Two: Choose!');
+                turn = 2;
+            }
+            else if (turn === 2) {
+                playerTwoChoice = $(this).attr('id');
+                evaluateBattle(playerOneChoice, playerTwoChoice);
+            }
+        });
+    }
+
+// Combat is called after both players have made their selections. It takes your choice and your opponent's choice as arguments.
+    function combat(p1, p2) {
+    // Run traditional rock, paper, scissors logic and return whether you won, lost, or had a draw.
+        switch(p1) {
+        case 'rock':
+          switch(p2) {
+                case 'rock':
+                    return 3;
+                case 'paper':
+                    return 2;
+                case 'scissors':
+                    return 1;
+            }
+          break;
+        case 'paper':
+            switch(p2) {
+                case 'rock':
+                    return 1;
+                case 'paper':
+                    return 3;
+                case 'scissors':
+                    return 2;
+            }
+          break;
+        case 'scissors':
+            switch(p2) {
+                case 'rock':
+                    return 2;
+                case 'paper':
+                    return 1;
+                case 'scissors':
+                    return 3;
+            }
+            break;
+        }
+    }
+
+    function tally() {
+    // Tally the result
+        if (result === 1) {
+            winningChoice = playerOneChoice;
+            losingChoice = playerTwoChoice;
+            matchResult = 'beats';
+            matchWinner = game.p1;
+            match.p1++;
+            match.count++;
+            game.matches++;
+        } 
+        else if (result === 2) {
+            winningChoice = playerTwoChoice;
+            losingChoice = playerOneChoice;
+            matchResult = 'beats';
+            matchWinner = game.p2;
+            match.p2++;
+            match.count++;
+            game.matches++;
+        }
+        else if (result === 3) {
+            winningChoice = playerOneChoice;
+            losingChoice = playerTwoChoice;
+            matchResult = 'ties';
+            matchWinner = 'none';
+            match.count++;
+            game.matches++;
+        }
+     }
+// Both players made their choices, who won?
+    function evaluateBattle(p1, p2) {
+    // Reset the turn to player 1
+        turn = 1;
+    // Script that determines who won goes here
+        result = combat(p1,p2);
+    // Tally the results
+        tally();
+    // Tell the lady what she won
+        $('#rps').hide();  // Hide the buttons so they can't click on them and we can deliver the results   
+        deliverGameUpdate(winningChoice + ' ' + matchResult + ' ' + losingChoice +'. </br>' + matchWinner + ' wins!'); // Show players the result 
+        match.count++; // update current match number
+        game.matches++; // update number of matches in game
+    // If a player has won three matches, the game is over
+        if (match.p1 === 3 || match.p2 === 3) {
+        // If we have played three matches, the game is over
+
+            if (match.p1 === 3) {
+                gameWinner = game.p1;
+                gameLoser = game.p2;
+            }
+            else if (match.p2 === 3) {
+                gameWinner = game.p2;
+                gameLoser = game.p1;
+            }
+            // Wait five second then end the game
+            var timer = "insert countdown here for 5 second then reload battle"; 
+            endGame(game.key);
+        }
+        else {
+        // wait five seconds then load the next match
+            var timer = "insert countdown here for 5 second then reload battle";   
+            loadMatch(match.count);    
+        }
+    }
+
+// Send updates live to the scoreboard
+    function updateScoreboard() {
+
+        var p1Ref = database.ref("players/" + game.p1);
+        var p2Ref = database.ref("players/" + game.p2);
+
+        p1Ref.once('value', function(snapshot) {
+            var player = snapshot.val();
+            $('.playerOneWins').html(player.wins);
+            $('.playerOneLosses').html(player.losses);
+        });
+
+        p2Ref.once('value', function(snapshot) {
+            var player = snapshot.val();
+            $('.playerTwoWins').html(player.wins);
+            $('.playerTwoLosses').html(player.losses);
+        });
+    }
+// Game is over
+    function endGame(game) {
+    // Show game results
+        deliverGameUpdate(gameWinner + 'wins!');
+    // update player records in database
+        // Increment winner's wins by 1.
+            var winnerRef = database.ref("players/" + gameWinner + "/wins");
+            winnerRef.transaction(function(currentWins) {
+               // If players/*winner*/wins has never been set, currentRank will be null.
+              return currentWins+1;
+            });
+        // Increment loser's losses by 1.
+            var loserRef = database.ref("players/" + gameLoser + "/losses");
+            winnerRef.transaction(function(currentLosses) {
+               // If players/*loser*/losses has never been set, currentRank will be null.
+              return currentLosses+1;
+            });
+        // Update Game Object in Database with name of winner
+            var gameRef = database.ref("games/" + game.key);
+            gameRef.update({ winner: gameWinner});
+        // Update Scoreboard
+        updateScoreboard();
+        // Print play again button
+        $('#gameUpdates').html('<button class="play-again">Play Again</button>');
+        // move game in database to completedGames
+
+//******************************
+// Incomplete
+//******************************
+
+        // build new game with same players
+        $('.play-again').on("click", newGame);
+    }
+
+    function newGame() {
+        gameWinner = '';
+        gameLoser = '';
+        playerOneChoice = null; // hold the RPS choice of player one for each match
+        playerTwoChoice = null; // hold the RPS choice of player two for each match
+        turn = 1; // determines whose turn it is to choose RPS
+
+        // update local game object
+        game.key = gameKey;
+        game.matches= 1;
+        // update local match object
+        match.count= 1;
+        // load scoreboard
+        loadScoreboard(game.key);
+    }
+
+// Load the scoreboard, one for each of the two players
+
+//******************************
+// MIGHT BE SOME ISSUES HERE -- NOT SURE IF PLAYER ONE WILL SEE PLAYER TWO BOX LOAD
+//******************************
+
+    function loadScoreboard(gameNum) {
+
+        console.log("Game Key: " + game.key);
+        console.log("Game P1: " + game.p1);
+        console.log("Game P2: " + game.p2);
+
+        $('#gameboardElements').show();
+    // build database references
+
+        console.log("Load Scoreboard GameKey: " + gameNum);
+        var gameRef = database.ref("games/" + gameNum);
+        var p1Ref = database.ref("players/" + game.p1);
+        var p2Ref = database.ref("players/" + game.p2);
+    // build player 1 box
+        if (game.p1 !== null) {
+            p1Ref.once('value', function(snapshot) {
+                var player = snapshot.val();
+                $('.playerOneName').html(snapshot.key);
+                $('.playerOneWins').html(player.wins);
+                $('.playerOneLosses').html(player.losses);
+            });
+        }
+        else {
+            $('.playerOneName').html("Waiting on player");
+        }
+    // build player 2 box
+        if (game.p2 !== null) {
+            p2Ref.once('value', function(snapshot) {
+                var player = snapshot.val();
+                $('.playerTwoName').html(snapshot.key);
+                $('.playerTwoWins').html(player.wins);
+                $('.playerTwoLosses').html(player.losses);
+            });
+
+            loadMatch(match.count);
+        }
+        else {
+            $('.playerTwoName').html("Waiting on player");
+        }
+
+        
+    }
+
+// Supposedly this is a listener that tells if there is a change to user session status
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+    // User is signed in.     
+        } 
+        else {
+    // No user is signed in.
+        }
+    });
+
+// Login is done, let's start the game
+    function startGame() {
+    // Remove the Login Box so we can start playing
+        $('.login-box').remove();
+    // Reveal the gameboard
+        $('#gameboardElements').show();
+    // Are we ready to begin?      
+        if( game.p2 === null) {
+            deliverGameUpdate('Wait for another player');
+        }
+        else if (game.p2 !== null) {
+           loadMatch(game.key);
+        }
+    }
+
+// if the active game is not full, log them in
+    function buildLogin() { 
+        if (game.p1 !== null & game.p2 !== null) {
+            loginBox = $('<div>').attr('class', 'login-box').html('<h1>Sorry, game is full!</h1>');
+            $('.login-box').html(loginBox);
+        }
+        else {
+        loginBox = $('<div>').attr('class', 'login-box').html('<h1>What is your name?</h1>');
+        $(loginBox).append('<input type="text" class="login-username">');
+        $(loginBox).append('<button class="login-user">Register</button>');
+        $('.login-box').html(loginBox);
+    // once they click on the Register button, take them to authentication 
+        $('.login-user').on('click',  authenticateUser);
+        }
+    }
+// anonymous authentication procedure
+    function authenticateUser() {    
+    // get the name they entered in the form
+        if ($('.login-username').val() !== '') {
+            usernameEntry = $('.login-username').val();
+        }
+    // I don't really know what this does but it is part of authentication process
+        firebase.auth().signInAnonymously().catch(function(error) {
+        // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+    // put user in database, never to be seen or heard from again
+        firebase.auth().onAuthStateChanged(function(user) {
+        // variables that quickly disappear
+            isAnonymous = user.isAnonymous;
+            uid = user.uid;
+        // We have a user, give them a user record and a player record
+            createPlayer(usernameEntry);     
+        // We have a player, now join a game
+            joinGame(usernameEntry);
+        });   
+
+    }
+
+// Rollovers for RPS buttons -- not currently in game
+    $('.icon-img').mouseenter(function() {
+    $(this).attr('src', 'assets/images/' + $(this).attr('data-over') +'.png')
+    });
+
+    $('.icon-img').mouseleave(function() {
+     $(this).attr('src', 'assets/images/' + $(this).attr('data-icon') +'.png')
+    });
+
+    $('.icon-img').mousedown(function() {
+    $(this).attr('src', 'assets/images/' + $(this).attr('data-over') +'.png')
+    });
+
+// event handler for log out button
+    $('.log-out').on("click", logOut);
+// build the login screen
+    buildLogin();
+
+// Create player identity
+    function createPlayer(user) {    
+    // Create player object in database
+        // Try to create a player, but only if the player username isn't already taken
+        var playerRef = database.ref("players/" + usernameEntry);
+        playerRef.transaction(function(currentData) {
+            if (currentData === null) {
+            // Add username to user record  
+                // set database locations
+                var ref = database.ref("users");
+                // Create user object in database
+                var userInfo = firebase.database().ref('users/' + uid).update({
+                    username: user
+                }); 
+            // Add player record
+                return {wins: 0, losses: 0, games: 0, account_created: firebase.database.ServerValue.TIMESTAMP};              
+            } 
+            else {
+                deliverGameUpdate('Player ' + usernameEntry + ' alreay exists');
+                console.log('Player ' + usernameEntry + ' already exists.');
+                return; // Abort the transaction.
+            }
+        }, function(error, committed, snapshot) {
+            if (error) {
+                console.log('Transaction failed abnormally!', error);
+            } 
+            else if (!committed) {
+                console.log('We aborted the transaction (because player already exists).');
+            } 
+            else {
+                console.log('Player ' + usernameEntry + ' added!');
+            }
+            console.log(usernameEntry + "'s' data: ", snapshot.val());
+        });
+    }
+
+// Join a game
+    function joinGame(user) {
+    // set database locations
+        var gamesRef = database.ref("games");
+        var query = gamesRef.orderByKey();
+    // will let us know if we did not find a game to add the player to and thus have to create a new game
+        var gameCheck = 0;
+        console.log('about to start query');
+                    
+        query.once("value")
+          .then(function(snapshot) {
+            if (snapshot.hasChildren()) {
+                snapshot.forEach(function(childSnapshot) {
+                // key should be equal to name of each 'Game' object
+                gameKey = childSnapshot.key;
+                console.log('Game Key = ' + gameKey);
+                // childData will be the actual contents of the child
+                var childData = childSnapshot.val();
+                console.log('Child Data Object = ' + childData);
+                console.log('Player 1: ' + childData.player1);
+                console.log('Player 2: ' + childData.player2);
+
+                var player1Data = childData.player1;
+                var player2Data = childData.player2;
+
+                // if there is no player 1, add my user as player 1 and stop loop
+                if (player1Data ==='undefined') {
+                    console.log ('if player 1');
+                    var addPlayerRef = database.ref("games/" + gameKey);
+                    // add the current user as player1
+                    addPlayerRef.update({
+                        player1: usernameEntry
+                    });
+                    // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+
+                    game.key = gameKey;
+                    game.p1 = usernameEntry;
+
+                    GameKey_page = gameKey;
+
+                    game.key = gameKey;
+                    game.p1 = usernameEntry;
+
+                    console.log("Game = " + game);
+
+                    gameCheck = 1; // we found a game, no need to create one
+                    // for god's sake, stop the loop! We're done!
+                    loadScoreboard(gameKey); 
+                    return true;
+                }
+
+                // if there is a player 1, but no player 2, add my user as player 2 and stop loop
+                else if (player1Data !== 'undefined') {
+                    console.log ('if player 1 and Player 2');
+                    var addPlayerRef = database.ref("games/" + gameKey);
+                    // add the current user as player2
+                    addPlayerRef.update({
+                        player2: user
+                    });
+                    // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+
+                    game.p2 = usernameEntry;
+                    GameKey_page = gameKey;
+                    P2_page = usernameEntry;
+                    gameCheck = 1; // we found a game, no need to create one
+                    // for god's sake, stop the loop! We're done!
+                    loadScoreboard(gameKey); 
+                    return true;
+                }
+                }); // end forEach Loop
+            }
+            // No children, create a game
+            else {
+                console.log("Children Check Else");
+            // Create new game and load current user as Player 1
+                console.log ('create game');
+                var gamesRef = database.ref("games");
+                var newGameRef = gamesRef.push();
+                newGameRef.update({
+                    player1: usernameEntry
+                });
+
+                // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                gameKey = newGameRef.getKey();
+                P1_page = usernameEntry;     
+
+                game.key = gameKey;
+                game.p1 = usernameEntry;
+                console.log('Game = ' + game.key);
+                loadScoreboard(gameKey); 
+            
+            }
+        }); // end query once and snapshot
+
+        if (gameCheck = 0) {
+        // Create new game and load current user as Player 1
+            console.log ('create game');
+            var gamesRef = database.ref("games");
+            var newGameRef = gamesRef.push();
+            newGameRef.update({
+                player1: usernameEntry
+            });
+        // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                gameKey = newGameRef.getKey();
+                P1_page = usernameEntry;     
+
+                game.key = gameKey;
+                game.p1 = usernameEntry;
+                console.log('Game589 = ' + game.key);
+                loadScoreboard(gameKey); 
+        }
+        else {
+            console.log("dont create game");
+        }
+
+
+    // User login is done, start the game
+        startGame();
+    } // End Join Game function
+
+    // Clear Connections and variables
+    function logOut() {
+        var ref1 = database.ref("users");
+        ref1.remove();
+        var ref2 = database.ref("connections");
+        ref2.remove();
+        numConnections = 0;
+
+        playerOneChoice = null;
+        playerTwoChoice = null;
+
+        game.key = '';
+        game.p1 = null;
+        game.p2 = null;
+        game.matches = 0;
+
+        match.count = 1;
+        match.p1 = 0;
+        match.p2 = 0;
+
+        turn = 1;
+
+        buildLogin();
+    }
+
+// ENTER CONNECTIONS SAMPLE FROM CLASS
+    // connectionsRef references a specific location in our database.
+    // All of our connections will be stored in this directory.
+    var connectionsRef = database.ref("/connections");
+    // '.info/connected' is a special location provided by Firebase that is updated every time the client's connection state changes.
+    // '.info/connected' is a boolean value, true if the client is connected and false if they are not.
+    var connectedRef = database.ref(".info/connected");
+    // When the client's connection state changes...
+    connectedRef.on("value", function(snap) {
+        // If they are connected..
+        if( snap.val() ) {
+            // Add user to the connections list.
+            var con = connectionsRef.push(true);
+            // Remove user from the connection list when they disconnect.
+            con.onDisconnect().remove();
+        };
+    });
+
+    // When first loaded or when the connections list changes...
+    connectionsRef.on("value", function(snap) {
+        // Display the viewer count in the html.
+        // The number of online users is the number of children in the connections list.
+        $("#watchers").html(snap.numChildren());
+        console.log("watchers:" + snap.numChildren());
+        numConnections = snap.numChildren();
+        console.log(snap.numChildren());
+    });
+
+}); // end on document ready
+</script>
+
+</body>
+</html>
+
+
+
+

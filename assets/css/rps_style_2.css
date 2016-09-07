@@ -124,6 +124,20 @@ button.login-user {
 	outline-style: none;
 }
 
+button.play-again {
+
+	background: #ff8e09;
+	color: #ffffff;
+	font-size: 13px;
+	font-family: 'Oxygen', Arial, sans-serif;
+	padding: 7px;
+	padding-left: 12px;
+	padding-right: 12px;
+	margin: 2px;
+	border: 0px;
+	outline-style: none;
+}
+
 input.login-username {
 	padding: 7px;
 	margin-right: 10px;
