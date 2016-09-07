@@ -2,242 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rock!Paper!Scissors!FIGHT!</title>
-    
-    <link href="assets/css/rps_style.css" rel="stylesheet" type="text/css"><!-- Add unique stylesheet -->
+    <title>Rock!Paper!Scissors!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add unique stylesheet -->
+    <link href="assets/css/rps_style_2.css" rel="stylesheet" type="text/css">
+<!-- Add Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700|Oxygen:300,400,700|Raleway:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet"><!-- Add Google Web Font -->
-    <script
-    src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"   
-    crossorigin="anonymous">   // Add jQuery
-    </script>
-
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Covered+By+Your+Grace|Handlee|Satisfy|Shadows+Into+Light|Shadows+Into+Light+Two|Yellowtail" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Londrina+Shadow|Pacifico" rel="stylesheet">
+<!-- Firebase JavaScript Link -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<!--load firebase credentials from outside root -->
+    <script src="../firebase.rps.js"></script>
+<!-- add jQuery -->
     <script
     src="https://code.jquery.com/jquery-3.1.0.js"   
     integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   
-    crossorigin="anonymous">   // Add jQuery
+    crossorigin="anonymous">   
     </script>
 </head>
 
 <body>
-
 <div id="header">
     <div id="header-inner">
-        <div id="logo"><img src="assets/images/rps-logo.png" width="300"></div>
+        <div id="logo"> <img src="assets/images/RPS-logo-3.png" class="rps-logo"></div>
     </div>
 </div>
 
 <div id="container">
-
     <div id="main-content">
-        <div id="main-content-inner">   
+        <div id="main-content-inner"> 
+            <div id="gameUpdates"></div>  
+            <div id="rps"> 
+                <div class="icon" id="rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
+                <div class="icon" id="paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
+                <div class="icon" id="scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
+            </div>
             <div id="gameSpace">
-
-                <div id="playerOneBox" class="playerBox">
-                    <div class="avatar">
-                        <img src="assets/images/avatars/avatar1.png" class="avatarImg">
-                        <h3>Won: <span class="playerOneWins blue wins">4</span>  Lost: <span class="playerOneLosses orange wins">3</span></h3>
-                    </div>  
-
-                    <div class="stat-table-label"><span class="stat-label">%Used</span><span class="stat-label">%Won</span></div>   
-                    <div class="stats playerOneStats">
-
+                <div class="login-box"></div>
+                <div id="gameboardElements">
                     
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1a1.png"></div>
-                            <div class="rock1X stat"></div>
-                            <div class="rock1Y stat"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1b1.png"></div>
-                            <div class="paper1X stat"></div>
-                            <div class="paper1Y stat"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1c1.png"></div>
-                            <div class="scissors1X stat"></div>
-                            <div class="scissors1Y stat"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="center-column">
-                    <div id="gameUpdates"><h1>Player One Wins!</h1></div>
-                    <div id="gameBoard">
-                        <div id="playerOneButtons" class="playerButtons">
-                            <div class="playerLabel"><h1 class="playerOne">1</h1><h4 class="player-name-label">PLAYER</h4></div>
-                            <div class="icon rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
-                            <div class="icon paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
-                            <div class="icon scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
-                        </div>
-                        <div id="playerTwoButtons" class="playerButtons">
-                            <div class="playerLabel"><h1 class="playerTwo">2</h1><h4 class="player-name-label">PLAYER</h4></div>
-                            <div class="icon rock"><img src="assets/images/rock-gray.png" class="icon-img" data-icon="2a1" data-over="2a2"></div>
-                            <div class="icon paper"><img src="assets/images/paper-gray.png" class="icon-img" data-icon="2b1" data-over="2b2"></div>
-                            <div class="icon scissors"><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="2c1" data-over="2c2"></div>
-                        </div>
-                    </div>
-                 </div>
-
-                <div id="playerTwoBox" class="playerBox">
-                    <div class="avatar">
-                        <img src="assets/images/avatars/avatar2.png" class="avatarImg">
-                        <h3>Won: <span class="playerTwoWins orange wins">4</span>  Lost: <span class="playerTwoLosses blue wins">3</span></h3>
-                    </div>
-                    <div class="stat-table-label"><span class="stat-label">%Used</span><span class="stat-label">%Won</span></div>
-                    <div class="stats playerTwoStats"> 
-                    
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1a1.png"></div>
-                            <div class="rock2X stat"></div>
-                            <div class="rock2Y stat"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1b1.png"></div>
-                            <div class="paper2X stat"></div>
-                            <div class="paper2Y stat"></div>
-                        </div>
-                        <div class="stat-block">
-                            <div class="small-icon"><img src="assets/images/1c1.png"></div>
-                            <div class="scissors2X stat"></div>
-                            <div class="scissors2Y stat"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>        
+            <div id="watchers"></div>
+        </div>  
     </div>
+    
 </div>
 
 <div id="footer">
-
-        <div id="footer-inner">
+    <div id="footer-inner">
         <p> NEVER run with scissors...or rocks...or paper.</p>
         <p>&copy; 2016  <strong><a href="https://www.linkedin.com/in/ideabrothers">Andrew Carr</a></strong> | 
         Demo project for <a href="https://www.codingbootcamputaustin.com/">The Coding Boot Camp</a>  at UT Austin Center for Professional Education
         </p>
-        </div>
- 
+    </div>
 </div>
 
 <script>
+// Hide the gameboard elememts that will later reappear after login is complete
+$('#gameboardElements').hide();
+$('#rps').hide();
+
 // If page is ready
 $(document).ready(function(){
 
 
-    var currentTurn = 1; // keeps track of whose turn it is
-    var gamesPlayed = 0; // keeps track of total games played
 
-    var playerOne = {
-        wins: 0,
-        losses: 0,
-        ties: 0,
-        rock: 0,
-        paper: 0,
-        scissors: 0,
-        rockWins: 0,
-        paperWins: 0,
-        scissorsWins: 0,
-        rockLosses: 0,
-        paperLosses: 0,
-        scissorsLosses: 0,
-        rockTies: 0,
-        paperTies: 0,
-        scissorsTies: 0
-    }
+// *********************************************
+// LISTENERS
+//**********************************************
 
-    var playerTwo = {
-        wins: 0,
-        losses: 0,
-        ties: 0,
-        rock: 0,
-        paper: 0,
-        scissors: 0,
-        rockWins: 0,
-        paperWins: 0,
-        scissorsWins: 0,
-        rockLosses: 0,
-        paperLosses: 0,
-        scissorsLosses: 0,
-        rockTies: 0,
-        paperTies: 0,
-        scissorsTies: 0
-    }
+// ---------------------------------------------
+// USER SESSION
 
-    var playerOneChoice;
-    var playerTwoChoice;
+// Supposedly this is a listener that tells if there is a change to user session status
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+    // User is signed in.     
+        } 
+        else {
+    // No user is signed in.
+        }
+    });
 
-// Write scoreboard
-    $('.playerOneWins').html(playerOne.wins);
-    $('.playerOneLosses').html(playerOne.losses);
-    $('.playerTwoWins').html(playerTwo.wins);
-    $('.playerTwoLosses').html(playerTwo.losses);
-
-// Tablulate Statistical History
-
-    var oneRocks = 0;
-    var onePapers = 0;
-    var oneScissors = 0;
-
-    var oneRocksWins = 0;
-    var onePapersWins = 0;
-    var oneScissorsWins = 0;
+// ---------------------------------------------
+// CONNECTIONS
 
 
-    var twoRocks = 0;
-    var twoPapers = 0;
-    var twoScissors = 0;
+    // connectionsRef references a specific location in our database.
+    // All of our connections will be stored in this directory.
+    var connectionsRef = database.ref("/connections");
+    // '.info/connected' is a special location provided by Firebase that is updated every time the client's connection state changes.
+    // '.info/connected' is a boolean value, true if the client is connected and false if they are not.
+    var connectedRef = database.ref(".info/connected");
+    // When the client's connection state changes...
+    connectedRef.on("value", function(snap) {
+        // If they are connected..
+        if( snap.val() ) {
+            // Add user to the connections list.
+            var con = connectionsRef.push(true);
+            // Remove user from the connection list when they disconnect.
+            con.onDisconnect().remove();
+        };
+    });
 
-    var twoRocksWins = 0;
-    var twoPapersWins = 0;
-    var twoScissorsWins = 0;
+    // When first loaded or when the connections list changes...
+   /* connectionsRef.on("value", function(snap) {
+        // Display the viewer count in the html.
+        // The number of online users is the number of children in the connections list.
+        $("#watchers").html(snap.numChildren());
+        console.log("watchers:" + snap.numChildren());
+        numConnections = snap.numChildren();
+        console.log(snap.numChildren());
+    });*/
 
-// Tablulate Statistical History
-
-function tabulateStats() {
-
-    if (gamesPlayed > 0) {
-
-        oneRocks = (playerOne.rock/gamesPlayed).toFixed(2);
-        onePapers = (playerOne.paper/gamesPlayed).toFixed(2);
-        oneScissors = (playerOne.scissors/gamesPlayed).toFixed(2);
-
-        oneRocksWins = (playerOne.rockWins/gamesPlayed).toFixed(2);
-        onePapersWins = (playerOne.paperWins/gamesPlayed).toFixed(2);
-        oneScissorsWins = (playerOne.scissorsWins/gamesPlayed).toFixed(2);
-
-        twoRocks = (playerTwo.rock/gamesPlayed).toFixed(2);
-        twoPapers = (playerTwo.paper/gamesPlayed).toFixed(2);
-        twoScissors = (playerTwo.scissors/gamesPlayed).toFixed(2);
-
-        twoRocksWins = (playerTwo.rockWins/gamesPlayed).toFixed(2);
-        twoPapersWins = (playerTwo.paperWins/gamesPlayed).toFixed(2);
-        twoScissorsWins = (playerTwo.scissorsWins/gamesPlayed).toFixed(2);
-
-        writeStats();
-    }
-}
-
-// Write stats to scoreboard
-
-function writeStats() {
-
-    $('.rock1X').html(oneRocks + '%');
-    $('.rock1Y').html(oneRocksWins + '%');
-    $('.paper1X').html(onePapers + '%');
-    $('.paper1Y').html(onePapersWins + '%');
-    $('.scissors1X').html(oneScissors + '%');
-    $('.scissors1Y').html(oneScissorsWins + '%');
-
-    $('.rock2X').html(twoRocks + '%');
-    $('.rock2Y').html(twoRocksWins + '%');
-    $('.paper2X').html(twoPapers + '%');
-    $('.paper2Y').html(twoPapersWins + '%');
-    $('.scissors2X').html(twoScissors + '%');
-    $('.scissors2Y').html(twoScissorsWins + '%');
-}
+// ---------------------------------------------
 
 
+// *********************************************
+// EVENT HANDLERS
+//**********************************************
+
+
+// event handle for RPS buttons
+    $('.icon').on("click", makeChoice);
 
 // Rollovers for RPS buttons
     $('.icon-img').mouseenter(function() {
@@ -252,12 +142,441 @@ function writeStats() {
     $(this).attr('src', 'assets/images/' + $(this).attr('data-over') +'.png')
     });
 
+    
+// build the login screen
+    buildLogin();
 
-    writeStats();
+// *********************************************
+// FUNCTIONS
+//**********************************************
+
+// if the active game is not full, log them in
+    function buildLogin() { 
+    // if you build this, they will login
+        loginBox = $('<div>').attr('class', 'login-box').html('<h1>What is your name?</h1>');
+        $(loginBox).append('<input type="text" class="login-username">');
+        $(loginBox).append('<button class="login-user">Register</button>');
+        $('.login-box').html(loginBox);
+    // once they click on the Register button, take them to authentication 
+        $('.login-user').on('click',  authenticateUser);
+    }
+
+// anonymous authentication procedure
+    function authenticateUser() {    
+    // get the name they entered in the form
+        if ($('.login-username').val() !== '') {
+            usernameEntry = $('.login-username').val();
+        }
+    // I don't really know what this does but it is part of authentication process
+        firebase.auth().signInAnonymously().catch(function(error) {
+        // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+    // put user in database, never to be seen or heard from again
+        firebase.auth().onAuthStateChanged(function(user) {
+        // variables that quickly disappear
+            isAnonymous = user.isAnonymous;
+            uid = user.uid;
+        // We have a user, give them a user record and a player record
+            createPlayer(usernameEntry);     
+        // We have a player, now join a game
+            joinGame(usernameEntry);
+        });   
+    }
+
+// Create player identity
+    function createPlayer(user) {    
+    // Create player object in database
+        // Try to create a player, but only if the player username isn't already taken
+        var playerRef = database.ref("players/" + usernameEntry);
+        playerRef.transaction(function(currentData) {
+            if (currentData === null) {
+            // Add username to user record  
+                // set database locations
+                var ref = database.ref("users");
+                // Create user object in database
+                var userInfo = firebase.database().ref('users/' + uid).update({
+                    username: user
+                }); 
+            // Add player record -- these fields have been deprecated really. They are now stored in player_scores
+                return {wins: 0, losses: 0, games: 0, account_created: firebase.database.ServerValue.TIMESTAMP};              
+            } 
+            else {
+                deliverGameUpdate('Player ' + usernameEntry + ' alreay exists');
+                console.log('Player ' + usernameEntry + ' already exists.');
+                return; // Abort the transaction.
+            }
+        }, function(error, committed, snapshot) {
+            if (error) {
+                console.log('Transaction failed abnormally!', error);
+            } 
+            else if (!committed) {
+                console.log('We aborted the transaction (because player already exists).');
+            } 
+            else {
+                console.log('Player ' + usernameEntry + ' added!');
+            }
+
+        });
+    }
+// Join a game
+    function joinGame(user) {
+    // set database locations
+        var gamesRef = database.ref("games");
+        var query = gamesRef.orderByKey(); // order by key should make sure we start with the oldest game and move forward chronologically
+// Check games, looking for open game to join
+        query.once("value")
+          .then(function(snapshot) {
+            if (snapshot.hasChildren()) { // if games do exist, look for an open game
+            // need to know the numner of children so we can create a new game if we go through all children without finding opening
+                snapCount = snapshot.numChildren();
+                childNumber = 0;
+                snapshot.forEach(function(childSnapshot) { // for each game, how many players are there
+                // key should be equal to name of each 'Game' object
+                    gameKey = childSnapshot.key;
+                    childNumber++; // we set this variable so we can compare it to number of children and know if we completed looking at children
+                // childData will be the actual contents of the child
+                    var childData = childSnapshot.val()
+                    var player1Data = childData.player_list.player1;
+                    var player2Data = childSnapshot.child("player_list").numChildren()
+
+                    console.log("player 1 data: " + player1Data);
+                    console.log("player 2 data: " + player2Data);
+
+                // if there is no player 1, add my user as player 1 and stop loop
+                    if (player1Data === 'undefined') {
+                        console.log ('if player 1');
+                        var addPlayerRef = database.ref("games/" + gameKey + '/player_list');
+                // add the current user as player1
+                        addPlayerRef.update({
+                            player1: usernameEntry
+                        });
+                // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                        playerNumber = 1;
+                        opponentNumber = 2;
+                // run the start game function
+                        startGame(playerNumber, usernameEntry);
+                // for god's sake, stop the loop! We're done!
+                        return true;
+                    }
+                // if there is a player 1, but no player 2, add my user as player 2 and stop loop
+                    else if (player1Data !== 'undefined' && player2Data !== 2) {
+                        console.log ('if player 1 exists and no Player 2');
+                        var addPlayerRef = database.ref("games/" + gameKey + '/player_list');
+                    // add the current user as player2
+                        addPlayerRef.update({
+                            player2: user
+                        });
+                        // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                        playerNumber = 2;
+                        opponentNumber = 1;
+
+                    // run the start game function
+                        startGame(playerNumber, usernameEntry);
+                    // for god's sake, stop the loop! We're done!
+                        return true;
+                    }
+                    // All games are full, create a game
+                    else if (childNumber == snapCount) {
+                        console.log("all games full, create a game");
+                    // Create new game and load current user as Player 1
+                        console.log ('create game');
+                        var gamesRef = database.ref("games");
+                        var newGameRef = gamesRef.push();
+                        var newGameKey = newGameRef.getKey();
+                    // add user as player 1
+                        var addPlayerRef = database.ref("games/" + newGameKey + '/player_list');
+                        addPlayerRef.update({
+                            player1: usernameEntry
+                        });
+                    // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                        playerNumber = 1;
+                        opponentNumber = 2;
+                        gameKey = newGameRef.getKey();
+
+                    // run the start game function
+                        startGame(playerNumber, usernameEntry);
+                    // stop the for each loop
+                        return true;           
+                    } 
+                }); // end forEach Loop
+            }
+            // No children, create a game
+            else {
+                console.log("No games exist, create a game");
+            // Create new game and load current user as Player 1
+                console.log ('create game');
+                var gamesRef = database.ref("games");
+                var newGameRef = gamesRef.push();
+                var newGameKey = newGameRef.getKey();
+            // add user as player 1
+                var addPlayerRef = database.ref("games/" + newGameKey + '/player_list');
+                addPlayerRef.update({
+                    player1: usernameEntry
+                });
+            // set page variables so we have easy access to who player1 and player 2 are and what game they are in
+                playerNumber = 1;
+                opponentNumber = 2;
+                gameKey = newGameRef.getKey();
+            // run the start game function
+                startGame(playerNumber, usernameEntry);
+            // stop looping of games
+                return true;           
+            }
+        }); // end query once and snapshot
+    } // End Join Game function
+
+// Login is done, let's start the game
+    function startGame(playerNum, playerID) {
+    // Remove the Login Box so we can start playing
+        $('.login-box').remove();
+    // Reveal the gameboard
+        $('#gameboardElements').show();
+    // Empty the gameboard before new game or when you append player boxes it will keep adding them
+        $('#gameboardElements').empty();
+    // show the RPS buttons so they can make their selections
+        $('#rps').show();    
+
+        deliverGameUpdate('');   
+
+    // Add data locations for easy reference later
+        var listRef = database.ref("games/" + gameKey + '/player_list');
+        var dataRef = database.ref("games/" + gameKey + '/player_data');
+        var scoreRef = database.ref("games/" + gameKey + '/player_scores');
+
+    // Listener to add scoreboard any time a new player joins
+        // a new player has been added. Give them a scoreboard
+        scoreRef.on("child_added", function(snapshot) {           
+            var scoreData = snapshot.val();
+
+            console.log ('Key: ' + snapshot.key);
+            console.log('Wins:' + snapshot.val().wins)
+            console.log('Losses:' + snapshot.val().losses)
+
+            buildPlayerBox = $('<div>').attr("class", "playerBox").attr("id", snapshot.key);
+            buildAvatarBox = $('<div>').attr("class", "avatar avatar-"+ snapshot.key);
+            buildPlayerName = $('<div>').attr("class", "playerName playerName-"+ snapshot.key).html(snapshot.val().userID);
+            buildPlayerWins = $('<h3>').attr("class", "wins-"+ snapshot.key).html('Won: <span class="'+snapshot.key+'Wins orange">' + snapshot.val().wins + '</span>');
+            buildPlayerLosses = $('<h3>').attr("class", "losses-"+ snapshot.key).html('Lost: <span class="'+snapshot.key+'Losses orange">' + snapshot.val().losses + '</span>');
+
+            $(buildAvatarBox).append(buildPlayerName);
+            $(buildAvatarBox).append(buildPlayerWins);
+            $(buildAvatarBox).append(buildPlayerLosses);
+            $(buildPlayerBox).append(buildAvatarBox);
+
+            $('#gameboardElements').append(buildPlayerBox); 
+
+            if (snapshot.numChildren() === 2) {
+            // Tell the player to choose their weapon
+                deliverGameUpdate('Make your choice!');
+            }
+            else if (snapshot.numChildren() < 2) {
+            // Notify player we are waiting
+                deliverGameUpdate('Waiting on another player to join');
+            }
+        });
+
+        // Add a score entry
+        var playerScoreRef = database.ref("games/" + gameKey + '/player_scores/' + playerNumber);
+
+        playerScoreRef.on('value', function(snapshot) {
+            if (snapshot.val() === null) {
+                 console.log('Oops1');
+                playerScoreRef.update({
+                        userID: playerID,
+                        wins: 0,
+                        losses: 0
+                        });
+            } 
+        });
+        // Add an entry to hold player's turn data
+        // state = 0 means game is ready to begin, state = 1 means game is over
+        // rps = 'none' means they have not selected
+        var playerDataRef = database.ref("games/" + gameKey + '/player_data/' + playerNum);
+      
+        playerDataRef.on('value', function(snapshot) {
+            if (snapshot.val() === null) {
+                console.log('Oops2');
+                playerDataRef.set({
+                                userId: playerID, 
+                                state: 0, 
+                                rps: 'none'
+                                });
+            }
+        });
+
+         // Notify player we are waiting
+        deliverGameUpdate('');
+    
+        // We need to run a listener to update scoreboards as necessary
+        var scoreRef = database.ref("games/" + gameKey + '/player_scores');
+
+    // Listener to add scoreboard any time a new player joins
+        // a new player has been added. Give them a scoreboard
+        scoreRef.on('child_changed', function(childSnapshot, prevChildName) {
+            console.log("Score Listener");
+            idKey = childSnapshot.key;
+            $('.'+idKey+'Wins').html(childSnapshot.val().wins);
+            $('.'+idKey+'Losses').html(childSnapshot.val().losses);
+
+        });
+       
+     
+        var dataRef = database.ref("games/" + gameKey + '/player_data');
+// Start Gameplay -- on any change to player_data, which holds player turns, execute this code
+        dataRef.on('child_changed', function(childSnapshot, prevChildName) {
+            dataRef.once('value', function(nameSnapshot) {
+                // data has changed, someone took a turn, get their choice
+                playerChoice = nameSnapshot.val()[playerNumber].rps;
+                opponentChoice = nameSnapshot.val()[opponentNumber].rps;
+
+                // if both players have not picked yet, tell player to wait
+                if (playerChoice !== 'none' && opponentChoice === 'none')  {
+                    deliverGameUpdate('Waiting for your opponent to choose');
+                }
+
+                // if both players HAVE picked, start evaluation
+                if (playerChoice !== 'none' && opponentChoice !== 'none')  {
+
+                    // Run combat function
+                    combat(playerChoice, opponentChoice);
+                    // Take result from combat function and see who won
+                    tally(combat(playerChoice, opponentChoice));
+                    // Tell the lady what she won
+                    $('#rps').hide();  // Hide the buttons so they can't click on them and we can deliver the results  
+                    deliverGameUpdate(winningChoice + ' ' + matchResult + ' ' + losingChoice +'. </br><span class="orange">' + matchOutput + '</span>'); // Show players the result 
 
 
-});
+                    var playerScoreRef = database.ref("games/" + gameKey + '/player_scores/' + playerNum);
+                    // Update player scores in database
+                   
+                    var currentWins;
+                    var currentLosses;
+
+                    if (nameSnapshot.val()[playerNumber].state === 1) {
+                        // Get current win and loss totals from database
+                        playerScoreRef.once('value')
+                        .then(
+                         function(snapshot) {
+                            currentWins = snapshot.val().wins;
+                            currentLosses = snapshot.val().losses;
+
+                            if (matchWinner === playerNum){
+                               currentWins++;
+                               console.log("New Wins:" + currentWins);
+                               playerScoreRef.update({wins: currentWins});
+                            }
+                            else if (matchWinner === opponentNumber){
+                                console.log("match winner: " + matchWinner);
+                                console.log("playrID: " + playerNum);
+
+                                currentLosses++;
+                                console.log("New Losses:" + currentLosses);
+                                playerScoreRef.update({losses: currentLosses});
+                            }
+                        });
+                    }
+              
+                    //ready next game
+                    // reset player data to show they have not made a choice
+                    playerDataRef.update({
+                                    state: 0,
+                                    rps: 'none'
+                                });  
+                    // Add a play again button at end of game
+                    $('#gameUpdates').append('</br><button class="play-again">Play Again</button>');
+                    // build new game with same players
+                    $('.play-again').on("click", function(){
+                        startGame(playerNumber, usernameEntry);
+                    });
+                }
+            });
+        });
+
+    } // end start game function
+
+// This is used to update game status for user
+    function deliverGameUpdate(update) {  
+        $('#gameUpdates').html('<h1>'+ update + '</h1>');
+    }
+// this runs after the playrr clicks on thier choice
+    function makeChoice() {
+        playerRPS = $(this).attr('id');
+        var playerDataRef = database.ref("games/" + gameKey + '/player_data/' + playerNumber);
+    // set the player's choice
+        playerDataRef.update({
+                    state: 1, 
+                    rps: playerRPS
+                    });
+    }
+// Combat is called after both players have made their selections. It takes your choice and your opponent's choice as arguments.
+    function combat(p1, p2) {
+        switch(p1) {
+        case 'rock':
+          switch(p2) {
+                case 'rock':
+                    return 3;
+                case 'paper':
+                    return 2;
+                case 'scissors':
+                    return 1;
+            }
+          break;
+        case 'paper':
+            switch(p2) {
+                case 'rock':
+                    return 1;
+                case 'paper':
+                    return 3;
+                case 'scissors':
+                    return 2;
+            }
+          break;
+        case 'scissors':
+            switch(p2) {
+                case 'rock':
+                    return 2;
+                case 'paper':
+                    return 1;
+                case 'scissors':
+                    return 3;
+            }
+            break;
+        }
+    }
+
+// Tally the result
+    function tally(result) {
+        if (result === 1) {
+            winningChoice = playerChoice;
+            losingChoice = opponentChoice;
+            matchResult = 'beats';
+            matchWinner = playerNumber;
+            matchOutput = "You Won!"
+        } 
+        else if (result === 2) {
+            winningChoice = opponentChoice;
+            losingChoice = playerChoice;
+            matchResult = 'beats';
+            matchWinner = opponentNumber;
+            matchOutput = "You Lost!"
+        }
+        else if (result === 3) {
+            winningChoice = playerChoice;
+            losingChoice = opponentChoice;
+            matchResult = 'ties';
+            matchWinner = 'none';
+            matchOutput = "Draw!"
+        }
+     }
+
+}); // end on document ready
+
+
+
 </script>
+
 </body>
 </html>
 

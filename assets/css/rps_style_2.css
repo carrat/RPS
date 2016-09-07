@@ -43,7 +43,7 @@ a:hover {
 	margin-bottom: 0px;
 	margin-top: 10px;
 	text-align: center;
-	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
 	/*box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.6);*/
 	border-left: 1px solid #ededed;
 	border-top: 1px solid #ededed;
@@ -64,8 +64,8 @@ a:hover {
 
 #container {
 	max-width: 1280px;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 5px;
+	padding-right: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
@@ -74,11 +74,11 @@ a:hover {
 	padding-bottom: 20px;
 	padding-top: 0px;
 	background: rgba(255,255,255,1.0);
-	box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.3);
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.3);
 	border-left: 1px solid #ededed;
 	background-image: url('..//images/rps-bg.png');
-	background-size: cover;;
-	min-height: 100%;
+	background-size: 100%;
+	background-repeat: no-repeat;
 }
 
 #main-content {
@@ -90,7 +90,7 @@ a:hover {
 	margin-top: 0px;
 	/*border: 1px solid #ff8e09;*/
 	border-top: none;
-	height: 600px;
+	height: 400px;
 }
 
 #main-content-inner { 
@@ -102,26 +102,94 @@ a:hover {
 	vertical-align: top;
 }
 
+h1 {
+	color: #ff8e09;
+	font-size: 40px;
+	font-family: 'Londrina Shadow', Arial, sans-serif;
+
+
+}
+
+button.login-user {
+
+	background: #ff8e09;
+	color: #ffffff;
+	font-size: 13px;
+	font-family: 'Oxygen', Arial, sans-serif;
+	padding: 7px;
+	padding-left: 12px;
+	padding-right: 12px;
+	margin: 2px;
+	border: 0px;
+	outline-style: none;
+}
+
+input.login-username {
+	padding: 7px;
+	margin-right: 10px;
+	width: 200px;
+	background: rgba(255,255,255,.1);
+	outline-style: none;
+	outline-offset: 0;
+	border: 1px solid #bdbdbd;
+	font-size: 14px;
+	color: #ff8e09;
+	font-weight: bold;
+
+}
+
+#buttons {
+	width: 100%;
+	text-align: center;
+	padding: 0px;
+	margin: 0px;
+}
+
+#rps {
+	width: 100%;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+	display:hidden;
+}
+
 #gameSpace {
 	display: table;
 	width: 100%;
 	text-align: center;
 	vertical-align: top;
 	margin: 0px;
+	padding: 0px;
 }
 #gameUpdates {
 	width: 100%;
 	padding: 0px;
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 #gameUpdates h1 {
 	font-family: 'Londrina Shadow', Arial, sans-serif;
 	color: #999999;
-	font-size: 48px;
+	font-size: 30px;
 	margin: 0px;
 	padding: 0px;
 	letter-spacing: .05em;
+
+}
+
+#gameboardElements {
+	width: 100%;
+	text-align: center;
+	display: table;
+
+}
+
+.playerName {
+	font-family: 'Londrina Shadow', Arial, sans-serif;
+	color: #999999;
+	font-size: 36px;
+	padding-bottom: 20px;
 
 }
 
@@ -180,19 +248,22 @@ span.wins {
 	margin-bottom: 40px;
 }
 
-.playerLabel h1.playerOne {
-	color: #0095b0;
-}
-
-.playerLabel h1.playerTwo {
-	color: #ff6c00;
-}
 
 #gameBoard {
 	width: 39%;
 	padding-top: 40px;
 	display: table-cell;
 	text-align: center;
+}
+
+#watchers {
+	width: 100%;
+	text-align: center;
+	color: #666666;
+	font-family: 'Oxygen', Arial, sans-serif;
+	font-size: 30px;
+	padding: 30px;
+
 }
 
 .avatar {
@@ -220,6 +291,15 @@ span.wins {
 	padding-top: 15px;
 	padding-bottom: 15px;
 
+
+}
+
+.icon {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .icon-img {
@@ -244,6 +324,7 @@ span.wins {
 #center-column {
 	padding: 0px;
 	margin: 0px;
+	display: table-cell;
 }
 
 
@@ -305,6 +386,12 @@ span.wins {
 	font-family: 'Covered By Your Grace', Arial, sans-serif;
 }
 
+span.orange {
+	color: #ff8e09;
+}
+
+
+
 .blue {
 	color: #ff8e09;
 	font-size: 36px;
@@ -356,7 +443,77 @@ span.wins {
 	margin-left: 30px;
 }
 
+.rps-logo {
+	max-width: 400px;
+
+}
+
 @media screen and (max-width: 768px) {
+
+	#container {
+	max-width: 1280px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	clear: both;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	background: rgba(255,255,255,1.0);
+	box-shadow: none;
+	border-left: none;
+	background-image: none;
+	}
+
+	.rps-logo {
+		max-width: 300px;
+	}
+
+	#main-content {
+	width: 100%;
+	padding: 0px;
+	text-align: left;
+	vertical-align: middle;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	/*border: 1px solid #ff8e09;*/
+	border-top: none;
+	height: 100%;
+	}
+
+	#logo {
+	padding-top: 15px;
+	padding-bottom: 0px;
+
+	}
+
+	#header {
+	max-width: 1280px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	background: rgba(255,255,255,1.0);
+	clear: both;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	text-align: center;
+	box-shadow: none;
+	/*box-shadow: 15px 15px 5px rgba(0, 0, 0, 0.6);*/
+	border-left: none;
+	border-top: none;
+	}
+
+	.playerName {
+	font-family: 'Londrina Shadow', Arial, sans-serif;
+	color: #999999;
+	font-size: 30px;
+	padding-bottom: 20px;
+
+	}
 	
 
 
