@@ -24,27 +24,38 @@
 </head>
 
 <body>
+
+
+<div id="container">
+
 <div id="header">
     <div id="header-inner">
         <div id="logo"> <img src="assets/images/RPS-logo-3.png" class="rps-logo"></div>
     </div>
 </div>
-
-<div id="container">
     <div id="main-content">
         <div id="main-content-inner"> 
             <div id="gameUpdates"></div>  
             <div id="rps"> 
-                <div class="icon" id="rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="1a2"></div>
-                <div class="icon" id="paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="1b2"></div>
-                <div class="icon" id="scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="1c2"></div>
+                <div class="icon" id="rock" ><img src="assets/images/rock-gray.png" class="icon-img" data-icon="1a1" data-over="2a2"></div>
+                <div class="icon" id="paper" ><img src="assets/images/paper-gray.png" class="icon-img" data-icon="1b1" data-over="2b2"></div>
+                <div class="icon" id="scissors" ><img src="assets/images/scissors-gray.png" class="icon-img" data-icon="1c1" data-over="2c2"></div>
             </div>
             <div id="gameSpace">
                 <div class="login-box"></div>
                 <div id="gameboardElements">
                     
                 </div>
+
+                <div id="chatBox">
+                    <div id="chatOut">Time to play rock, paper, scissors</div>
+                 <div id="chatForm"><input type="text" class="chat-text"><button class="add-chat">Chat</button></div>
+                </div>
             </div>
+            </div>
+
+            
+
             <div id="watchers"></div>
         </div>  
     </div>
@@ -64,6 +75,7 @@
 // Hide the gameboard elememts that will later reappear after login is complete
 $('#gameboardElements').hide();
 $('#rps').hide();
+$('#chatBox').hide();
 
 // If page is ready
 $(document).ready(function(){
@@ -337,6 +349,7 @@ $(document).ready(function(){
         $('#gameboardElements').empty();
     // show the RPS buttons so they can make their selections
         $('#rps').show();    
+        $('#chatBox').show();
 
         deliverGameUpdate('');   
 

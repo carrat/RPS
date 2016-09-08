@@ -37,7 +37,7 @@ a:hover {
 	padding-top: 10px;
 	margin-left: auto;
 	margin-right: auto;
-	background: rgba(53,53,53,.6);
+	background: rgba(93,93,93,.6);
 	clear: both;
 	margin-bottom: 0px;
 	margin-top: 10px;
@@ -62,19 +62,18 @@ a:hover {
 
 #container {
 	max-width: 980px;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
 	margin-bottom: 5px;
 	clear: both;
-	padding-bottom: 10px;
+	padding-bottom: 20px;
 	padding-top: 0px;
 	background: rgba(255,255,255,.1);
 	box-shadow: 15px 15px 7px rgba(0, 0, 0, 0.6);
-	border-left: 0px solid #999999;
-	border-top: 0px solid #999999;
+	border-left: 0px solid #ededed;
 	/*background-image: url('../images/rps-bg.png');*/
 	background-size: 100%;
 	background-repeat: no-repeat;
@@ -89,7 +88,7 @@ a:hover {
 	margin-top: 0px;
 	/*border: 1px solid #ff8e09;*/
 	border-top: none;
-	
+	height: 400px;
 }
 
 #main-content-inner { 
@@ -109,9 +108,7 @@ h1 {
 
 }
 
-
-
-button.play-again {
+button.login-user {
 
 	background: #ff8e09;
 	color: #ffffff;
@@ -125,7 +122,7 @@ button.play-again {
 	outline-style: none;
 }
 
-button.login-user {
+button.play-again {
 
 	background: #ff8e09;
 	color: #ffffff;
@@ -143,52 +140,13 @@ input.login-username {
 	padding: 7px;
 	margin-right: 10px;
 	width: 200px;
-	background: rgba(255,255,255,1);
+	background: rgba(255,255,255,.8);
 	outline-style: none;
 	outline-offset: 0;
 	border: 1px solid #bdbdbd;
 	font-size: 14px;
 	color: #ff8e09;
 	font-weight: bold;
-
-}
-
-
-button.add-chat {
-
-	background: rgba(0,0,0,.3);
-	color: #ffffff;
-	font-size: 16px;
-	border: 1px solid #bdbdbd;
-	font-family: 'Oxygen', Arial, sans-serif;
-	padding: 7px;
-	padding-left: 12px;
-	padding-right: 12px;
-	margin: 0px;
-	margin-top: 0px;
-	outline-style: none;
-}
-
-button.add-chat:hover {
-
-	background: rgba(255,155,0,.8);
-	color: #ffffff;
-	
-}
-
-input.chat-text {
-	padding: 7px;
-	margin-right: 10px;
-	width: 240px;
-	background: rgba(0,0,0,.3);
-	outline-style: none;
-	outline-offset: 0;
-	border: 1px solid #bdbdbd;
-	font-size: 15px;
-	color: #ffffff;
-	font-weight: bold;
-	display: inline-block;
-	padding-top: 10px;
 
 }
 
@@ -256,37 +214,6 @@ input.chat-text {
 	margin:20px;
 	background: rgba(0,0,0,.3);
 	border: 1px solid #b8b8b8;
-	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.6);
-}
-
-#chatForm {
-
-	vertical-align: middle;
-	align: center;
-}
-
-#chatBox {
-	padding: 0px;
-	display: hidden;
-	vertical-align: top;
-	text-align: center;
-	width: 100%;
-	
-}
-
-#chatOut {
-	font-family: 'Amatica SC', Arial, sans-serif;
-	padding: 10px;
-	display: inline-block;
-	vertical-align: top;
-	text-align: center;
-	margin:20px;
-	width: 600px;
-	background: rgba(0,0,0,.3);
-	border: 1px solid #b8b8b8;
-	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.6);
-	color: #ffffff;
-	font-size: 24px;
 }
 
 span.wins {
@@ -394,7 +321,6 @@ span.wins {
 	height: 70px;
 	width: 70px;
 	margin-bottom: 10px;
-	opacity: .8;
 
 }
 
@@ -424,7 +350,6 @@ span.wins {
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 0px;
-
 	/*position: fixed;
 	bottom: 0;
 	left: 0;*/
@@ -541,33 +466,25 @@ span.orange {
 @media screen and (max-width: 768px) {
 
 	#container {
-	
-	padding-left: 0px;
-	padding-right: 0px;
+	max-width: 1280px;
+	padding-left: 5px;
+	padding-right: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0px;
 	margin-bottom: 5px;
 	clear: both;
-	padding-bottom: 50px;
+	padding-bottom: 0px;
 	padding-top: 0px;
-	background: rgba(0,0,0,.8);
+	background: rgba(255,255,255,1.0);
 	box-shadow: none;
 	border-left: none;
-
+	background-image: none;
 	}
 
 	.rps-logo {
 		max-width: 300px;
 	}
-
-	#chatOut {
-	
-	margin:10px;
-	width: 300px;
-	padding: 8px;
-	
-}
 
 	#main-content {
 	width: 100%;
@@ -588,12 +505,13 @@ span.orange {
 	}
 
 	#header {
+	max-width: 1280px;
 	padding-left: 0px;
 	padding-right: 0px;
 	padding-top: 0px;
 	margin-left: auto;
 	margin-right: auto;
-	
+	background: rgba(255,255,255,1.0);
 	clear: both;
 	margin-bottom: 0px;
 	margin-top: 0px;
@@ -605,7 +523,8 @@ span.orange {
 	}
 
 	.playerName {
-	font-family: 'Amatica SC', Arial, sans-serif;
+	font-family: 'Londrina Shadow', Arial, sans-serif;
+	color: #999999;
 	font-size: 30px;
 	padding-bottom: 20px;
 
@@ -613,7 +532,9 @@ span.orange {
 
 	html {
 	
-
+	background-image: none;
+	background-size: cover;
+	min-height: 100%;
 
 
 	}
@@ -635,7 +556,9 @@ span.orange {
 
 html {
 	
-
+	background-image: none;
+	background-size: cover;
+	min-height: 100%;
 }
 
 }
