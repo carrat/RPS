@@ -633,9 +633,52 @@ span.orange {
 
 @media screen and (max-width: 408px) {
 
-html {
-	
+.playerBox {
+	padding: 5px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 33%;
+	margin:10px;
+	background: rgba(0,0,0,.3);
+	border: 1px solid #b8b8b8;
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.6);
+}
 
+.avatar h3 span.orange {
+	font-size: 20px;
+	padding: 0px;
+	margin: 0px;
+
+}
+
+.avatar h3 {
+	font-size: 20px;
+	padding: 0px;
+	margin: 0px;
+
+
+}
+
+.playerName {
+	font-family: 'Amatica SC', Arial, sans-serif;
+	font-size: 25px;
+	padding-bottom: 5px;
+
+	}
+
+	#chatOut {
+	font-family: 'Amatica SC', Arial, sans-serif;
+	padding: 4px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	margin:10px;
+	background: rgba(0,0,0,.3);
+	border: 1px solid #b8b8b8;
+	box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.6);
+	color: #ffffff;
+	font-size: 18px;
 }
 
 }

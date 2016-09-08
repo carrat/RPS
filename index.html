@@ -48,7 +48,11 @@
                 </div>
 
                 <div id="chatBox">
-                    <div id="chatOut">Time to play rock, paper, scissors</div>
+                    <div id="chatOut">
+                        <div id="chat1">Welcome to Rock, Paper Scissors! Chat with your opponent.</div>
+                        <div id="chat2"></div>
+
+                    </div>
                  <div id="chatForm"><input type="text" class="chat-text"><button class="add-chat">Chat</button></div>
                 </div>
             </div>
@@ -153,6 +157,9 @@ $(document).ready(function(){
     $('.icon-img').mousedown(function() {
     $(this).attr('src', 'assets/images/' + $(this).attr('data-over') +'.png')
     });
+
+// Event Handler for Chat
+ $('.add-chat').on('click',  chatUp);
 
     
 // build the login screen
@@ -307,6 +314,8 @@ $(document).ready(function(){
                         opponentNumber = 2;
                         gameKey = newGameRef.getKey();
 
+                        deliverGameUpdate('Waiting on another player to join');
+
                     // run the start game function
                         startGame(playerNumber, usernameEntry);
                     // stop the for each loop
@@ -331,6 +340,8 @@ $(document).ready(function(){
                 playerNumber = 1;
                 opponentNumber = 2;
                 gameKey = newGameRef.getKey();
+
+                deliverGameUpdate('Waiting on another player to join');
             // run the start game function
                 startGame(playerNumber, usernameEntry);
             // stop looping of games
@@ -350,8 +361,6 @@ $(document).ready(function(){
     // show the RPS buttons so they can make their selections
         $('#rps').show();    
         $('#chatBox').show();
-
-        deliverGameUpdate('');   
 
     // Add data locations for easy reference later
         var listRef = database.ref("games/" + gameKey + '/player_list');
@@ -380,14 +389,10 @@ $(document).ready(function(){
 
             $('#gameboardElements').append(buildPlayerBox); 
 
-            if (snapshot.numChildren() === 2) {
-            // Tell the player to choose their weapon
-                deliverGameUpdate('Make your choice!');
-            }
-            else if (snapshot.numChildren() < 2) {
-            // Notify player we are waiting
-                deliverGameUpdate('Waiting on another player to join');
-            }
+       
+            deliverGameUpdate('');
+
+
         });
 
         // Add a score entry
@@ -418,10 +423,19 @@ $(document).ready(function(){
                                 });
             }
         });
+        // Add a chat entry
+        var playerChatRef = database.ref("games/" + gameKey + '/chat_data/' + playerNum);
 
-         // Notify player we are waiting
-        deliverGameUpdate('');
-    
+        playerChatRef.on('value', function(snapshot) {
+            if (snapshot.val() === null) {
+                console.log('Oops3');
+                playerChatRef.set({
+                                userId: playerID,
+                                message: null
+                                });
+            }
+        });
+
         // We need to run a listener to update scoreboards as necessary
         var scoreRef = database.ref("games/" + gameKey + '/player_scores');
 
@@ -432,6 +446,16 @@ $(document).ready(function(){
             idKey = childSnapshot.key;
             $('.'+idKey+'Wins').html(childSnapshot.val().wins);
             $('.'+idKey+'Losses').html(childSnapshot.val().losses);
+
+        });
+
+        var chatRef = database.ref("games/" + gameKey + '/chat_data');
+
+        // Listener to add chat any time a a player chats
+        chatRef.on('child_changed', function(childSnapshot, prevChildName) {
+            console.log("Chat Listener");
+            chatKey = childSnapshot.key;
+            $('#chat'+chatKey).html('<span class="orange">' + childSnapshot.val().userId + '</span>: ' + childSnapshot.val().message);
 
         });
        
@@ -522,6 +546,19 @@ $(document).ready(function(){
                     state: 1, 
                     rps: playerRPS
                     });
+    }
+
+// this runs after the user adds a chat message
+    function chatUp() {
+        if ($('.chat-text').val() !== '') {
+            chatEntry = $('.chat-text').val();
+        }
+        var playerChatRef = database.ref("games/" + gameKey + '/chat_data/' + playerNumber);
+    // set the player's choice
+        playerChatRef.update({
+                    message: chatEntry
+                    });
+        $('.chat-text').val('');
     }
 // Combat is called after both players have made their selections. It takes your choice and your opponent's choice as arguments.
     function combat(p1, p2) {
